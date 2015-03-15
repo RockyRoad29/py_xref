@@ -214,6 +214,11 @@ def run(args):
     if args.svg:
         with open(args.svg,'w') as f:
             f.write(xref.to_svg())
+
+    if args.png:
+        with open(args.png,'w') as f:
+            f.write(xref.to_png())
+
     if args.dot:
         with open(args.dot,'w') as f:
             f.write(xref.to_dot())

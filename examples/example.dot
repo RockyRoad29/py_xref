@@ -1,0 +1,43 @@
+digraph G {
+        node [style="filled"];
+        edge [fontsize="8",fontname="Arial"];
+
+        "manage" [label="manage"];
+"ext" [label="ext"];
+"settings" [label="settings"];
+"helpers" [label="helpers"];
+"app" [label="app"];
+"testing" [label="testing"];
+subgraph "cluster_info" {
+                label="INFO";
+                color="navajowhite";
+                style="filled";
+                "info.views" [label="views"];
+"info.__init__" [label="__init__"];
+}
+subgraph "cluster_base" {
+                label="BASE";
+                color="navajowhite";
+                style="filled";
+                "base.tests" [label="tests"];
+"base.views" [label="views"];
+"base.models" [label="models"];
+"base.__init__" [label="__init__"];
+"base.context_processors" [label="context_processors"];
+"base.forms" [label="forms"];
+}
+    "helpers" -> "testing" [label="AppFactory"];
+    "settings" -> "testing" [label="TestingConfig"];
+    "ext" -> "testing" [label="db"];
+    "ext" -> "base.views" [label="login_manager"];
+    "base.forms" -> "base.views" [label="LoginForm"];
+    "base.models" -> "base.views" [label="User"];
+    "helpers" -> "app" [label="AppFactory"];
+    "settings" -> "app" [label="DevelopmentConfig"];
+    "ext" -> "app" [label="assets"];
+    "app" -> "manage" [label="app"];
+    "ext" -> "manage" [label="db"];
+    "testing" -> "base.tests" [label="KitTestCase"];
+    "ext" -> "base.context_processors" [label="gravatar"];
+    "ext" -> "base.models" [label="db"];
+}
